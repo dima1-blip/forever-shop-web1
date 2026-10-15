@@ -1,1004 +1,290 @@
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
+/* =========================================
+   FOREVER SHOP — НОВЫЕ АНИМАЦИИ
+   ========================================= */
 
-:root {
-    --bg: #f5f5f7;
-    --card: #ffffff;
-    --text: #111111;
-    --muted: #777777;
-    --border: #e5e5e7;
-    --black: #111111;
-    --white: #ffffff;
-    --green: #20a464;
-    --danger: #e53935;
-}
-
-html {
-    scroll-behavior: smooth;
-}
-
-body {
-    font-family:
-        -apple-system,
-        BlinkMacSystemFont,
-        "Segoe UI",
-        Roboto,
-        Arial,
-        sans-serif;
-
-    background: var(--bg);
-    color: var(--text);
-
-    min-height: 100vh;
-
-    -webkit-font-smoothing: antialiased;
-}
-
-
-/* ========================= */
-/* HEADER */
-/* ========================= */
-
-.header {
-
-    height: 72px;
-
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    padding: 0 20px;
-
-    background: rgba(255, 255, 255, 0.92);
-
-    border-bottom: 1px solid var(--border);
-
-    position: sticky;
-    top: 0;
-    z-index: 100;
-
-    backdrop-filter: blur(20px);
-}
-
-.brand {
-
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.brand-logo {
-
-    width: 40px;
-    height: 40px;
-
-    border-radius: 12px;
-
-    background: #111;
-
-    color: white;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    font-size: 22px;
-}
-
-.brand h1 {
-
-    font-size: 17px;
-    font-weight: 700;
-    line-height: 20px;
-}
-
-.brand span {
-
-    font-size: 11px;
-    color: var(--muted);
-}
-
-
-/* ========================= */
-/* CART BUTTON */
-/* ========================= */
-
-.cart-button {
-
-    width: 44px;
-    height: 44px;
-
-    border: 0;
-    border-radius: 14px;
-
-    background: #f0f0f2;
-
-    font-size: 20px;
-
-    cursor: pointer;
-
+/* Кнопка "В корзину" */
+.add {
     position: relative;
-
-    transition: 0.2s;
-}
-
-.cart-button:active {
-    transform: scale(0.94);
-}
-
-.cart-count {
-
-    position: absolute;
-
-    right: -4px;
-    top: -4px;
-
-    min-width: 20px;
-    height: 20px;
-
-    padding: 0 5px;
-
-    background: #111;
-
-    color: white;
-
-    border-radius: 20px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    font-size: 11px;
-    font-weight: 700;
-}
-
-
-/* ========================= */
-/* HERO */
-/* ========================= */
-
-.hero {
-
-    margin: 16px;
-
-    min-height: 310px;
-
-    border-radius: 28px;
-
-    background:
-        linear-gradient(
-            135deg,
-            #151515,
-            #363636
-        );
-
-    color: white;
-
     overflow: hidden;
-
-    position: relative;
-
-    display: flex;
-    align-items: center;
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease,
+        box-shadow 0.2s ease;
 }
 
-.hero::after {
-
+/* Блик при добавлении */
+.add::after {
     content: "";
 
     position: absolute;
 
-    width: 260px;
-    height: 260px;
+    width: 22px;
+    height: 120px;
 
-    border-radius: 50%;
+    left: -70px;
+    top: -35px;
 
-    background:
-        radial-gradient(
-            circle,
-            rgba(255,255,255,.16),
-            transparent 65%
-        );
+    background: rgba(255, 255, 255, 0.35);
 
-    right: -80px;
-    top: -70px;
+    transform: rotate(25deg);
+
+    pointer-events: none;
 }
 
-.hero-content {
+/* Состояние "Добавлено" */
+.add.added {
+    background: #20a464;
 
-    position: relative;
-    z-index: 2;
+    transform: scale(0.96);
 
-    padding: 30px;
+    box-shadow:
+        0 6px 20px rgba(32, 164, 100, 0.35);
 }
 
-.hero-label {
-
-    font-size: 11px;
-
-    letter-spacing: 2px;
-
-    opacity: .65;
+/* Блик */
+.add.added::after {
+    animation: buttonShine 0.55s ease;
 }
 
-.hero h2 {
+@keyframes buttonShine {
 
-    font-size: 36px;
+    0% {
+        left: -70px;
+    }
 
-    line-height: 1.05;
-
-    margin: 10px 0 14px;
-
-    letter-spacing: -1.5px;
-}
-
-.hero p {
-
-    max-width: 350px;
-
-    color: rgba(255,255,255,.7);
-
-    line-height: 1.5;
-
-    font-size: 14px;
-}
-
-.hero-button {
-
-    margin-top: 22px;
-
-    border: 0;
-
-    border-radius: 14px;
-
-    padding: 13px 18px;
-
-    background: white;
-
-    color: #111;
-
-    font-weight: 700;
-
-    cursor: pointer;
+    100% {
+        left: 130%;
+    }
 }
 
 
-/* ========================= */
-/* CATEGORIES */
-/* ========================= */
+/* =========================================
+   АНИМАЦИЯ КАРТОЧКИ ТОВАРА
+   ========================================= */
 
-.categories {
-
-    display: flex;
-
-    gap: 8px;
-
-    overflow-x: auto;
-
-    padding: 4px 16px 18px;
-
-    scrollbar-width: none;
+.product.product-added {
+    animation: productPop 0.65s ease;
 }
 
-.categories::-webkit-scrollbar {
-    display: none;
-}
+@keyframes productPop {
 
-.category {
+    0% {
+        transform: scale(1);
+    }
 
-    flex: 0 0 auto;
+    30% {
+        transform: scale(1.035);
+    }
 
-    border: 1px solid var(--border);
+    60% {
+        transform: scale(0.985);
+    }
 
-    background: white;
-
-    color: #555;
-
-    padding: 10px 16px;
-
-    border-radius: 30px;
-
-    font-size: 13px;
-
-    cursor: pointer;
-
-    transition: .2s;
-}
-
-.category.active {
-
-    background: #111;
-
-    color: white;
-
-    border-color: #111;
+    100% {
+        transform: scale(1);
+    }
 }
 
 
-/* ========================= */
-/* CATALOG */
-/* ========================= */
+/* =========================================
+   АНИМАЦИЯ КОРЗИНЫ
+   ========================================= */
 
-main {
-
-    padding: 0 16px 40px;
+.cart-button.cart-bounce {
+    animation: cartBounce 0.55s ease;
 }
 
-.section-title {
+@keyframes cartBounce {
 
-    margin: 8px 0 18px;
-}
+    0% {
+        transform: scale(1);
+    }
 
-.section-title span {
+    20% {
+        transform: scale(1.18) rotate(-8deg);
+    }
 
-    font-size: 10px;
+    40% {
+        transform: scale(0.92) rotate(6deg);
+    }
 
-    letter-spacing: 2px;
+    60% {
+        transform: scale(1.08) rotate(-3deg);
+    }
 
-    color: #999;
-}
+    80% {
+        transform: scale(0.98);
+    }
 
-.section-title h2 {
-
-    margin-top: 4px;
-
-    font-size: 24px;
-
-    letter-spacing: -.7px;
-}
-
-.products {
-
-    display: grid;
-
-    grid-template-columns:
-        repeat(2, minmax(0, 1fr));
-
-    gap: 12px;
+    100% {
+        transform: scale(1) rotate(0);
+    }
 }
 
 
-/* ========================= */
-/* PRODUCT */
-/* ========================= */
-
-.product {
-
-    background: white;
-
-    border-radius: 20px;
-
-    padding: 10px;
-
-    border: 1px solid var(--border);
-
-    overflow: hidden;
-
-    transition: .2s;
-}
-
-.product:active {
-    transform: scale(.985);
-}
+/* =========================================
+   БЕЙДЖ ПАМЯТИ
+   ========================================= */
 
 .product-image {
-
-    width: 100%;
-
-    aspect-ratio: 1 / 1;
-
-    border-radius: 15px;
-
-    background: #f5f5f7;
-
-    overflow: hidden;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
+    position: relative;
 }
 
-.product-image img {
-
-    width: 100%;
-    height: 100%;
-
-    object-fit: contain;
-
-    padding: 8px;
-}
-
-.product h3 {
-
-    font-size: 15px;
-
-    margin: 11px 4px 4px;
-
-    line-height: 1.2;
-}
-
-.product p {
-
-    margin: 0 4px;
-
-    font-size: 11px;
-
-    line-height: 1.4;
-
-    color: var(--muted);
-
-    min-height: 31px;
-}
-
-.price {
-
-    margin: 9px 4px;
-
-    font-size: 16px;
-
-    font-weight: 800;
-}
-
-.add {
-
-    width: 100%;
-
-    border: 0;
-
-    background: #111;
-
-    color: white;
-
-    border-radius: 12px;
-
-    padding: 11px 6px;
-
-    font-size: 12px;
-
-    font-weight: 700;
-
-    cursor: pointer;
-
-    transition: .2s;
-}
-
-.add:active {
-    transform: scale(.97);
-}
-
-
-/* ========================= */
-/* MODAL */
-/* ========================= */
-
-.modal {
-
-    position: fixed;
-
-    inset: 0;
-
-    z-index: 1000;
-
-    display: flex;
-
-    align-items: flex-end;
-
-    justify-content: center;
-}
-
-.modal.hidden {
-    display: none;
-}
-
-.modal-overlay {
+.storage-badge {
 
     position: absolute;
 
-    inset: 0;
+    top: 9px;
+    right: 9px;
 
-    background: rgba(0,0,0,.45);
+    z-index: 5;
 
-    backdrop-filter: blur(5px);
+    padding: 5px 8px;
+
+    border-radius: 8px;
+
+    background: rgba(17, 17, 17, 0.88);
+
+    color: white;
+
+    font-size: 10px;
+
+    font-weight: 700;
+
+    backdrop-filter: blur(8px);
+
+    -webkit-backdrop-filter: blur(8px);
 }
 
-.modal-window {
 
-    position: relative;
+/* =========================================
+   ПЛАВНОЕ ПОЯВЛЕНИЕ ТОВАРОВ
+   ========================================= */
 
-    z-index: 2;
-
-    width: 100%;
-
-    max-width: 620px;
-
-    max-height: 90vh;
-
-    overflow-y: auto;
-
-    background: white;
-
-    border-radius: 26px 26px 0 0;
-
-    padding: 20px;
-
-    animation: modalUp .25s ease;
+.product {
+    animation: productAppear 0.35s ease both;
 }
 
-@keyframes modalUp {
+@keyframes productAppear {
 
     from {
-        transform: translateY(100%);
+        opacity: 0;
+        transform: translateY(10px);
     }
 
     to {
+        opacity: 1;
         transform: translateY(0);
     }
 }
 
 
-/* ========================= */
-/* MODAL HEADER */
-/* ========================= */
+/* =========================================
+   ЭФФЕКТ НАЖАТИЯ НА ТОВАР
+   ========================================= */
 
-.modal-header {
-
-    display: flex;
-
-    justify-content: space-between;
-
-    align-items: flex-start;
-
-    margin-bottom: 20px;
-}
-
-.modal-header span {
-
-    color: #999;
-
-    font-size: 9px;
-
-    letter-spacing: 2px;
-}
-
-.modal-header h2 {
-
-    font-size: 26px;
-
-    margin-top: 3px;
-}
-
-.close-button {
-
-    width: 36px;
-    height: 36px;
-
-    border: 0;
-
-    border-radius: 50%;
-
-    background: #f0f0f2;
-
-    font-size: 25px;
-
-    cursor: pointer;
+.product:active {
+    transform: scale(0.985);
 }
 
 
-/* ========================= */
-/* CART ITEMS */
-/* ========================= */
+/* =========================================
+   ПЛАВНОЕ НАЖАТИЕ КНОПОК
+   ========================================= */
 
-.cart-items {
-
-    display: flex;
-
-    flex-direction: column;
-
-    gap: 10px;
+button {
+    -webkit-tap-highlight-color: transparent;
 }
 
-.cart-item {
-
-    display: grid;
-
-    grid-template-columns:
-        58px 1fr auto;
-
-    gap: 12px;
-
-    align-items: center;
-
-    padding: 10px;
-
-    border-radius: 16px;
-
-    background: #f7f7f8;
-}
-
-.cart-thumb {
-
-    width: 58px;
-    height: 58px;
-
-    object-fit: contain;
-
-    border-radius: 12px;
-
-    background: white;
-}
-
-.cart-name {
-
-    font-size: 14px;
-
-    font-weight: 700;
-}
-
-.cart-price {
-
-    margin-top: 3px;
-
-    color: #777;
-
-    font-size: 12px;
-}
-
-.qty {
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 10px;
-
-    margin-top: 7px;
-}
-
-.qty button {
-
-    width: 27px;
-    height: 27px;
-
-    border: 0;
-
-    border-radius: 8px;
-
-    background: white;
-
-    font-size: 18px;
-
-    cursor: pointer;
-}
-
-.remove {
-
-    border: 0;
-
-    background: transparent;
-
-    color: #999;
-
-    font-size: 18px;
-
-    cursor: pointer;
+button:active {
+    transition: transform 0.08s ease;
 }
 
 
-/* ========================= */
-/* EMPTY CART */
-/* ========================= */
+/* =========================================
+   КНОПКА HERO
+   ========================================= */
 
-.empty-cart {
-
-    text-align: center;
-
-    padding: 40px 10px;
-
-    color: #777;
+.hero-button {
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
 }
 
-.empty-cart.hidden {
-    display: none;
+.hero-button:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 8px 25px rgba(0, 0, 0, 0.2);
 }
 
-.empty-icon {
-
-    font-size: 42px;
-
-    margin-bottom: 10px;
-}
-
-.empty-cart h3 {
-
-    color: #111;
-
-    margin-bottom: 5px;
+.hero-button:active {
+    transform: scale(0.96);
 }
 
 
-/* ========================= */
-/* CART FOOTER */
-/* ========================= */
+/* =========================================
+   КАТЕГОРИИ
+   ========================================= */
 
-.cart-footer {
-
-    margin-top: 20px;
-
-    border-top: 1px solid var(--border);
-
-    padding-top: 18px;
+.category {
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease,
+        color 0.2s ease;
 }
 
-.total-row {
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: space-between;
-
-    margin-bottom: 14px;
-
-    font-size: 16px;
-}
-
-.total-row strong {
-
-    font-size: 22px;
-}
-
-.checkout-button,
-.send-order-button {
-
-    width: 100%;
-
-    border: 0;
-
-    border-radius: 15px;
-
-    background: #111;
-
-    color: white;
-
-    padding: 15px;
-
-    font-size: 15px;
-
-    font-weight: 700;
-
-    cursor: pointer;
-}
-
-.checkout-button.hidden {
-    display: none;
+.category:active {
+    transform: scale(0.94);
 }
 
 
-/* ========================= */
-/* TELEGRAM USER */
-/* ========================= */
-
-.telegram-user {
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 12px;
-
-    background: #f5f5f7;
-
-    border-radius: 16px;
-
-    padding: 12px;
-
-    margin-bottom: 20px;
-}
-
-.user-avatar {
-
-    width: 48px;
-    height: 48px;
-
-    border-radius: 50%;
-
-    background: #111;
-
-    color: white;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    font-size: 21px;
-
-    overflow: hidden;
-}
-
-.telegram-user strong {
-
-    display: block;
-
-    font-size: 14px;
-}
-
-.telegram-user span {
-
-    display: block;
-
-    margin-top: 3px;
-
-    color: #777;
-
-    font-size: 12px;
-}
-
-
-/* ========================= */
-/* FORM */
-/* ========================= */
-
-.form {
-
-    display: flex;
-
-    flex-direction: column;
-
-    gap: 8px;
-}
-
-.form label {
-
-    font-size: 12px;
-
-    font-weight: 700;
-
-    margin-top: 5px;
-}
-
-.form input,
-.form textarea {
-
-    width: 100%;
-
-    border: 1px solid var(--border);
-
-    background: #f7f7f8;
-
-    border-radius: 13px;
-
-    padding: 13px;
-
-    font-family: inherit;
-
-    font-size: 14px;
-
-    outline: none;
-
-    resize: vertical;
-}
-
-.form input:focus,
-.form textarea:focus {
-
-    border-color: #111;
-
-    background: white;
-}
-
-
-/* ========================= */
-/* CHECKOUT TOTAL */
-/* ========================= */
-
-.checkout-total {
-
-    display: flex;
-
-    justify-content: space-between;
-
-    align-items: center;
-
-    margin: 20px 0 14px;
-
-    padding-top: 16px;
-
-    border-top: 1px solid var(--border);
-}
-
-.checkout-total span {
-
-    color: #777;
-}
-
-.checkout-total strong {
-
-    font-size: 23px;
-}
-
-.secure-text {
-
-    text-align: center;
-
-    color: #999;
-
-    font-size: 10px;
-
-    margin-top: 10px;
-}
-
-
-/* ========================= */
-/* FOOTER */
-/* ========================= */
-
-footer {
-
-    padding: 30px 20px 50px;
-
-    text-align: center;
-
-    color: #999;
-
-    font-size: 11px;
-}
-
-.footer-logo {
-
-    color: #111;
-
-    font-weight: 700;
-
-    font-size: 14px;
-
-    margin-bottom: 5px;
-}
-
-
-/* ========================= */
-/* DESKTOP */
-/* ========================= */
-
-@media (min-width: 700px) {
-
-    .header {
-
-        padding-left: 40px;
-        padding-right: 40px;
+/* =========================================
+   КАРТОЧКИ — МЯГКИЙ HOVER НА ПК
+   ========================================= */
+
+@media (hover: hover) {
+
+    .product {
+        transition:
+            transform 0.2s ease,
+            box-shadow 0.2s ease;
     }
 
-    .hero {
+    .product:hover {
+        transform: translateY(-3px);
 
-        max-width: 1100px;
-
-        margin: 25px auto;
+        box-shadow:
+            0 10px 30px rgba(0, 0, 0, 0.07);
     }
 
-    main {
+    .add:hover {
+        transform: translateY(-1px);
+    }
 
-        max-width: 1100px;
+}
 
-        margin: auto;
+
+/* =========================================
+   МОБИЛЬНАЯ ВЕРСИЯ
+   ========================================= */
+
+@media (max-width: 380px) {
+
+    .hero h2 {
+        font-size: 30px;
     }
 
     .products {
-
-        grid-template-columns:
-            repeat(4, minmax(0, 1fr));
+        gap: 8px;
     }
 
-    .categories {
+    .product h3 {
+        font-size: 14px;
+    }
 
-        max-width: 1100px;
-
-        margin: auto;
+    .price {
+        font-size: 14px;
     }
 
 }
