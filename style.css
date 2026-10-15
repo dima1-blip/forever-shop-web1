@@ -288,3 +288,196 @@ button:active {
     }
 
 }
+
+/* =========================================
+   FOREVER SHOP — АНИМАЦИИ
+   ========================================= */
+
+.add {
+    position: relative;
+    overflow: hidden;
+    transition:
+        transform .2s ease,
+        background .2s ease,
+        box-shadow .2s ease;
+}
+
+.add::after {
+    content: "";
+    position: absolute;
+
+    width: 25px;
+    height: 120px;
+
+    left: -70px;
+    top: -30px;
+
+    background: rgba(255,255,255,.35);
+
+    transform: rotate(25deg);
+
+    pointer-events: none;
+}
+
+.add.added {
+    background: #20a464 !important;
+    transform: scale(.96);
+
+    box-shadow:
+        0 6px 20px rgba(32,164,100,.35);
+}
+
+.add.added::after {
+    animation: foreverShine .55s ease;
+}
+
+@keyframes foreverShine {
+
+    0% {
+        left: -70px;
+    }
+
+    100% {
+        left: 130%;
+    }
+}
+
+
+/* =========================================
+   АНИМАЦИЯ КАРТОЧКИ
+   ========================================= */
+
+.product.product-added {
+    animation: foreverProduct .6s ease;
+}
+
+@keyframes foreverProduct {
+
+    0% {
+        transform: scale(1);
+    }
+
+    35% {
+        transform: scale(1.04);
+    }
+
+    65% {
+        transform: scale(.98);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+
+/* =========================================
+   АНИМАЦИЯ КОРЗИНЫ
+   ========================================= */
+
+.cart-button.cart-bounce {
+    animation: foreverCart .55s ease;
+}
+
+@keyframes foreverCart {
+
+    0% {
+        transform: scale(1);
+    }
+
+    25% {
+        transform: scale(1.18) rotate(-7deg);
+    }
+
+    50% {
+        transform: scale(.92) rotate(5deg);
+    }
+
+    75% {
+        transform: scale(1.08) rotate(-2deg);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+
+/* =========================================
+   ПАМЯТЬ 256 / 512 ГБ
+   ========================================= */
+
+.storage-badge {
+    position: absolute;
+
+    top: 8px;
+    right: 8px;
+
+    z-index: 5;
+
+    padding: 5px 8px;
+
+    border-radius: 8px;
+
+    background: rgba(0,0,0,.8);
+
+    color: #fff;
+
+    font-size: 10px;
+    font-weight: 700;
+
+    backdrop-filter: blur(8px);
+}
+
+
+/* =========================================
+   КАРТИНКА ТОВАРА
+   ========================================= */
+
+.product-image {
+    position: relative;
+}
+
+
+/* =========================================
+   ПЛАВНОЕ ПОЯВЛЕНИЕ
+   ========================================= */
+
+.product {
+    animation: foreverAppear .35s ease both;
+}
+
+@keyframes foreverAppear {
+
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* =========================================
+   НАЖАТИЕ НА КАРТОЧКУ
+   ========================================= */
+
+.product:active {
+    transform: scale(.985);
+}
+
+
+/* =========================================
+   КНОПКИ
+   ========================================= */
+
+button {
+    -webkit-tap-highlight-color: transparent;
+}
+
+button:active {
+    transform: scale(.97);
+}
